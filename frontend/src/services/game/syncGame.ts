@@ -24,8 +24,9 @@ export const [syncGameAtom] = atomsWithQuery<GameInfo | null>((get) => ({
       const PhatStrategy = new Contract(CONTRACT_ADDRESS, Abi, provider);
       const c2 = await PhatStrategy.c2();
       const stake = await PhatStrategy.stake();
+
       let lastAction = await PhatStrategy.lastAction();
-      const status = getGameStatus(c2.toString(), stake.toString());
+      const status = getGameStatus(stake.toString(), c2.toString());
       return {
         status,
         lastAction: parseInt(lastAction.toString()),

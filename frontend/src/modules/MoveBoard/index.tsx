@@ -36,7 +36,7 @@ const MoveItem: React.FC<MoveItemProps> = ({
       className={cx(
         "p-[16px] flex flex-col sm:flex-row justify-center items-center gap-x-[8px] w-full h-[100px] sm:h-[300px] text-[16px] leading-[24px] border-[1px] border-[#111111] hover:border-[#292E41] text-[#111111] hover:text-[#292E41] hover:bg-[#CBF0ED] cursor-pointer",
         selectedValue === value &&
-          "border-[#292E41] text-[#292E41] bg-[#292E410a]"
+          "border-[#292E41] text-[#292E41] bg-[#CBF0ED]"
       )}
     >
       {renderReactNode(icon)}

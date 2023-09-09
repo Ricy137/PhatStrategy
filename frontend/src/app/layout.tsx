@@ -1,5 +1,8 @@
 import "./globals.css";
 import type { Metadata } from "next";
+import { ReactNode, Suspense } from "react";
+import RoundBoard, { RoundBoardLoading } from "@/modules/RoundBoard";
+
 import Providers from "@/modules/Providers";
 
 export const metadata: Metadata = {
@@ -15,7 +18,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Providers>{children}</Providers>
+        <Providers>
+          <main className="p-[24px] flex flex-col justify-center items-center gap-y-[32px] w-full max-w-[1920px] min-h-screen">
+            <div className="w-[90%]">
+              <Suspense fallback={<RoundBoardLoading />}>
+                <RoundBoard />
+              </Suspense>
+            </div>
+            {children}
+          </main>
+        </Providers>
       </body>
     </html>
   );
