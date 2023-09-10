@@ -1,9 +1,11 @@
 "use client";
-import { useCallback, useEffect } from "react";
+import { useCallback } from "react";
 import { useForm } from "react-hook-form";
+import Link from "next/link";
 import cx from "clsx";
 import { WrapperCard } from "@/components/Card";
 import Input from "@/components/Input";
+import Button from "@/components/Button";
 import AuthConnect from "@/modules/AuthConnect";
 import MoveBoard from "@/modules/MoveBoard";
 import useInTransaction from "@/hooks/useInTransaction";
@@ -39,7 +41,14 @@ const FirsthandPage: React.FC = () => {
   const { loading, handleExecAction } = useInTransaction(onSubmit);
 
   return (
-    <WrapperCard className="w-full">
+    <WrapperCard className="gap-y-[24px] w-full">
+      <div className="w-full flex flex-row justify-end items-center">
+        <Link href="/firsthand/solve">
+          <Button variant="outlined" className="!px-[12px]">
+            Looking for Solve Page
+          </Button>
+        </Link>
+      </div>
       <form
         className="flex flex-col items-center gap-y-[24px]"
         onSubmit={handleSubmit(handleExecAction)}
@@ -91,7 +100,7 @@ const FirsthandPage: React.FC = () => {
             type="submit"
             value={loading ? "pending..." : "Commit your move"}
             className={cx(
-              "px-[40px] flex flex-row justify-center items-center h-[36px] border-[1px] border-solid border-[#000000] whitespace-nowrap cursor-pointer rounded-[30px]",
+              "px-[40px] flex flex-row justify-center items-center h-[36px] hover:bg-[#9AE9E9] border-[1px] border-solid border-[#000000] whitespace-nowrap cursor-pointer rounded-[30px]",
               loading && "bg-gray-400 pointer-events-none cursor-not-allowed"
             )}
           />

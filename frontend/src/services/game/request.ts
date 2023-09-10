@@ -14,7 +14,7 @@ export const [, requestAtom] = atomsWithMutation((get) => ({
     const signer = await new BrowserProvider(window.ethereum).getSigner();
     const RSPContract = new Contract(CONTRACT_ADDRESS, Abi, signer);
     let tx = await RSPContract.request(move, {
-      value: (parseInt(stake) * 102) / 100,
+      value: BigInt((parseInt(stake) * 102) / 100),
     });
     await tx.wait();
     if (!tx.hash) throw new Error("Transaction failed");

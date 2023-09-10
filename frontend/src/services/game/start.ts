@@ -40,8 +40,6 @@ export const useStartGame = () => {
         }
       );
       await tx.wait();
-      // let lastAction = await (tx as Contract).lastAction();
-
       router.push("/firsthand/solve");
     },
     []

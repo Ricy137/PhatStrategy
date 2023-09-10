@@ -11,3 +11,9 @@ export const keccak256Hash = (types: string[], values: string[]) => {
   let bytes = abiCoder.encode([...types], [...values]);
   return keccak256(bytes);
 };
+
+export const decodeData = (types: string[], data: string) => {
+  let abiCoder = new AbiCoder();
+  let decodedData = abiCoder.decode([...types], data);
+  return decodedData;
+};

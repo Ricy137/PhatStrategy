@@ -70,8 +70,8 @@ const FirstHandSolveForm: React.FC = () => {
             type="submit"
             value={loading ? "pending..." : "resolve the result"}
             className={cx(
-              "px-[14px] flex flex-row justify-center items-center h-[32px] whitespace-nowrap cursor-pointer border-[1px] text-[14px] rounded-[8px] leading-[22px] bg-[#111111] text-[#F1F1F3] hover:bg-[#292E41] hover:text-[#F1F1F3]",
-              loading && "pointer-events-none cursor-not-allowed opacity-30"
+              "px-[40px] flex flex-row justify-center items-center h-[36px] hover:bg-[#9AE9E9] border-[1px] border-solid border-[#000000] whitespace-nowrap cursor-pointer rounded-[30px]",
+              loading && "bg-gray-400 pointer-events-none cursor-not-allowed"
             )}
           />
         </AuthConnect>
