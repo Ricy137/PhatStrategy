@@ -1,7 +1,12 @@
 # PhatStrategy
 An on-chain strategy game that's leveraging [Karma3 api(lens)](https://openapi.lens.k3l.io/) and phat function. It's a two-players game, so call your friend, bet few Matics, compete your strategies and enjoy the exertion of wisdom.
 
-[Live Demo](https://phata-strategy.vercel.app/) **It's on Polygon Mainnet**
+[Live Demo]([https://phata-strategy.vercel.app/](https://phata-strategy.vercel.app/)
+[Video](https://www.youtube.com/watch?v=WrLH3gKIidQ)
+
+|-|-|
+|mumbai testnet address|[0xa8b024F2622D89456018A3F5A8bc834b9FB8215E](https://mumbai.polygonscan.com/address/0xa8b024f2622d89456018a3f5a8bc834b9fb8215e)|
+|polygon mainnet address|[]()
 
 ## Game Rules and process
 Basically, firsthand assign two lens handles, and the one who's assigned the handle with higher score of [Karma3 profile score](https://docs.karma3labs.com/decentralized-social/lens-protocol) wins and get all the stakes apart of 1% fees. However, both firsthand and secondhand can choose to reverse or not. If only one person choose to reverse, then the one with lower score will win, if no one or both choose to reverse, then higher scored one still wins. And the score from Karma3 algorithm can be from "engagement" or "creator" strategy, they'll be randomly used with equal chances. (more detailed explanation is on *How's it designed* part)
