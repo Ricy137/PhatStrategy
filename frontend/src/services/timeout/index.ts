@@ -3,7 +3,7 @@ import { BrowserProvider, Contract } from "ethers";
 import { useRouter } from "next/navigation";
 import Abi from "@/utils/contract/abi.json";
 import { CHAIN_ID, CONTRACT_ADDRESS } from "@/utils/constants";
-// import { useShowToast } from "@/components/Toast";
+import { useShowToast } from "@/components/Toast";
 
 //TODO: derived atom is a better way than hook
 // export const timeoutAtom = atom(async (get) => {
@@ -21,30 +21,30 @@ import { CHAIN_ID, CONTRACT_ADDRESS } from "@/utils/constants";
 
 export const useTimeout = () => {
   const router = useRouter();
-  //   const showToast = useShowToast();
+  const showToast = useShowToast();
 
   const j1Timeout = useCallback(async () => {
     if (typeof window === "undefined") return;
     if (!window.ethereum) {
-      //   showToast({ content: "Please install metamask", type: "failed" });
+      showToast({ content: "Please install metamask", type: "failed" });
       return;
     }
     let network = window.ethereum.networkVersion;
     if (network !== CHAIN_ID) {
-      //   showToast({
-      //     content: "Please change your network to Sepolia",
-      //     type: "failed",
-      //   });
+      showToast({
+        content: "Please change your network to Sepolia",
+        type: "failed",
+      });
       return null;
     }
     const signer = await new BrowserProvider(window.ethereum).getSigner();
     const PhatStrategy = new Contract(CONTRACT_ADDRESS, Abi, signer);
     const tx = await PhatStrategy.j1Timeout();
     await tx.wait();
-    // showToast({
-    //   content: "Stake has be returned sucessfully",
-    //   type: "success",
-    // });
+    showToast({
+      content: "Stake has be returned sucessfully",
+      type: "success",
+    });
     router.push("/");
   }, []);
 
@@ -52,25 +52,25 @@ export const useTimeout = () => {
     //to avoid error during server pre-rendering
     if (typeof window === "undefined") return;
     if (!window.ethereum) {
-      //   showToast({ content: "Please install metamask", type: "failed" });
+      showToast({ content: "Please install metamask", type: "failed" });
       return;
     }
     let network = window.ethereum.networkVersion;
     if (network !== CHAIN_ID) {
-      //   showToast({
-      //     content: "Please change your network to Sepolia",
-      //     type: "failed",
-      //   });
+      showToast({
+        content: "Please change your network to Sepolia",
+        type: "failed",
+      });
       return null;
     }
     const signer = await new BrowserProvider(window.ethereum).getSigner();
     const RPSContract = new Contract(CONTRACT_ADDRESS, Abi, signer);
     const tx = await RPSContract.j2Timeout();
     await tx.wait();
-    // showToast({
-    //   content: "Stake has be returned sucessfully",
-    //   type: "success",
-    // });
+    showToast({
+      content: "Stake has be returned sucessfully",
+      type: "success",
+    });
     router.push("/");
   }, []);
 

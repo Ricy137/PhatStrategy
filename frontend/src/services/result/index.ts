@@ -8,6 +8,8 @@ const Result_dic = ["TIE", "Firsthand won!", "Secondhand won!"];
 export const [resultAtom] = atomsWithInfiniteQuery((get) => ({
   queryKey: ["result", (get(syncGameAtom) as GameInfo)?.status],
   queryFn: async () => {
+    //TODO: temp solution to prevent prerender
+    if (typeof window === "undefined") return;
     const res = await fetch(
       `https://api-testnet.polygonscan.com/api?module=logs&action=getLogs&fromBlock=39953427&toBlock=999999999999&address=${CONTRACT_ADDRESS}&topic0=0x34fa627446f032cedc60a5521c4a8fbdd28f3ce106d8c6f6c17322ada873cebb&sort=desc`
     );

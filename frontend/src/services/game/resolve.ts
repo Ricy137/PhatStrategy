@@ -14,8 +14,12 @@ export const useResolveGame = () => {
       throw new Error("Please install metamask");
     }
     const signer = await new BrowserProvider(window.ethereum).getSigner();
-    const RSPContract = new Contract(CONTRACT_ADDRESS, Abi, signer);
-    let tx = await RSPContract.solve(move, salt);
+    const PhatStrategy = new Contract(CONTRACT_ADDRESS, Abi, signer);
+    const isMessageReceived = await PhatStrategy.isMessageReceived();
+    if (!isMessageReceived || isMessageReceived === "false") {
+      throw new Error("Please wait for Phala Network finish computation");
+    }
+    let tx = await PhatStrategy.solve(move, salt);
     await tx.wait();
     router.push("/result");
   }, []);

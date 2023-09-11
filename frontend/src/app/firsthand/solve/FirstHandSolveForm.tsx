@@ -5,11 +5,11 @@ import cx from "clsx";
 import useInTransaction from "@/hooks/useInTransaction";
 import { WrapperCard } from "@/components/Card";
 import Input from "@/components/Input";
-// import { useShowToast } from "@/components/Toast";
+import { useShowToast } from "@/components/Toast";
 import MoveBoard from "@/modules/MoveBoard";
 import AuthConnect from "@/modules/AuthConnect";
 import { useResolveGame } from "@/services/game";
-// import { errorMessage } from "@/utils/error";
+import { errorMessage } from "@/utils/error";
 
 interface SolveForm {
   move: number;
@@ -18,7 +18,7 @@ interface SolveForm {
 
 const FirstHandSolveForm: React.FC = () => {
   const resolveGame = useResolveGame();
-  // const showToast = useShowToast();
+  const showToast = useShowToast();
   const {
     register,
     handleSubmit,
@@ -30,8 +30,8 @@ const FirstHandSolveForm: React.FC = () => {
       await resolveGame(move, salt);
     } catch (err) {
       if (err instanceof Error) {
-        // const message = errorMessage(err);
-        // showToast({ content: message, type: "failed" });
+        const message = errorMessage(err);
+        showToast({ content: message, type: "failed" });
       }
       console.log(err);
     }

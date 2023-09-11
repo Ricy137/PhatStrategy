@@ -11,14 +11,6 @@ export default function Home() {
   );
 }
 
-const LandingBanner: React.FC = () => {
-  return (
-    <WrapperCard className="md:col-span-2 flex flex-row justify-between w-full md:w-[732px] h-fit text-[16px] md:text-[24px] leading-[24px] md:leading-[32px]">
-      123
-    </WrapperCard>
-  );
-};
-
 const FirsthandCard: React.FC = () => {
   return (
     <Link href="/firsthand">

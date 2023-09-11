@@ -1,5 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
+import { ToastRender } from "@/components/Toast";
 import Navbar from "@/modules/Navbar";
 import InfoBoard from "@/modules/InfoBoard";
 import Providers from "@/modules/Providers";
@@ -18,6 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Providers>
+          <ToastRender />
           <Navbar />
           <main className="p-[24px] flex flex-col justify-center items-center gap-y-[32px] w-full max-w-[1920px] min-h-screen">
             <div className="w-[90%]">
