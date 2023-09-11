@@ -1,5 +1,5 @@
 import { atomsWithInfiniteQuery } from "jotai-tanstack-query";
-import { CONTRACT_ADDRESS } from "@/utils/constants";
+import { CONTRACT_ADDRESS, SCAN_URL } from "@/utils/constants";
 import { decodeData } from "@/utils/cryptograph";
 import { syncGameAtom, GameInfo } from "../game";
 
@@ -11,7 +11,7 @@ export const [resultAtom] = atomsWithInfiniteQuery((get) => ({
     //TODO: temp solution to prevent prerender
     if (typeof window === "undefined") return;
     const res = await fetch(
-      `https://api-testnet.polygonscan.com/api?module=logs&action=getLogs&fromBlock=39953427&toBlock=999999999999&address=${CONTRACT_ADDRESS}&topic0=0x34fa627446f032cedc60a5521c4a8fbdd28f3ce106d8c6f6c17322ada873cebb&sort=desc`
+      `${SCAN_URL}api?module=logs&action=getLogs&fromBlock=39953427&toBlock=999999999999&address=${CONTRACT_ADDRESS}&topic0=0x34fa627446f032cedc60a5521c4a8fbdd28f3ce106d8c6f6c17322ada873cebb&sort=desc`
     );
     const data = await res.json();
     const { result } = data;

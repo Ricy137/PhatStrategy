@@ -6,7 +6,7 @@ import InfoBoard from "@/modules/InfoBoard";
 import Providers from "@/modules/Providers";
 
 export const metadata: Metadata = {
-  title: "Phala Strategy",
+  title: "Phat Strategy",
   description: "A game built on Phala and Lens Network",
 };
 
