@@ -29,5 +29,5 @@ However, purely using scores from Karma3 to compete isn't enough for a game, it'
 
 As said, in the game, the reverse mechanism is introduced to prevent the second situation. And to prevent the first situation, firsthand's rendered the privilege to assign the handles in the beginning, it's the essential part to make the game playful. Firshand can set one handle has higher scores on both "engagement" and "creator" strategy of Karma3, so firsthand reduced the randomness of Karma3 manually and is purely betting on whether or not the secondhand will reverse, which the familiarity between the two players can be used for the move prediction for secondhand. And for secondhand, since on-chain&Karma3 is public, secondhand can analize firsthand's strategy and react accordingly. Furthermore, the association with lens can also be used for your strategies making. 
 
-So start the game with your friend, make the best of your knowlege for each other and exert your wisdom with delicated strategies😎
+So what're the strategies in your mind? Though still limited compared to production game, but you do have a space to extert your wisdom and win some money😎
 
