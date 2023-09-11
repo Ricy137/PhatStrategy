@@ -2,6 +2,7 @@
 An on-chain strategy game that's leveraging [Karma3 api(lens)](https://openapi.lens.k3l.io/) and phat function. It's a two-players game, so call your friend, bet few Matics, compete your strategies and enjoy the exertion of wisdom.
 
 [Live Demo]([https://phata-strategy.vercel.app/](https://phata-strategy.vercel.app/) *testnet currently*
+
 [Video](https://www.youtube.com/watch?v=WrLH3gKIidQ)
 
 |||
