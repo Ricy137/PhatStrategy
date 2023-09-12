@@ -27,12 +27,12 @@ async function waitForResponse(consumer: Contract, event: Event) {
   return receipt.events;
 }
 
-describe("TestLensApiConsumerContract", function () {
+describe("PhatStrategy", function () {
   it("Push and receive message", async function () {
     // Deploy the contract
     const [deployer] = await ethers.getSigners();
-    const TestLensApiConsumerContract = await ethers.getContractFactory("TestLensApiConsumerContract");
-    const consumer = await TestLensApiConsumerContract.deploy(deployer.address);
+    const PhatStrategy = await ethers.getContractFactory("PhatStrategy");
+    const consumer = await PhatStrategy.deploy(deployer.address);
 
     // Make a request
     const profileId = "0x01";

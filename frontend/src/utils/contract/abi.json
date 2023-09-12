@@ -328,7 +328,7 @@
     "name": "c2",
     "outputs": [
       {
-        "internalType": "enum TestLensApiConsumerContract.Move",
+        "internalType": "enum PhatStrategy.Move",
         "name": "",
         "type": "uint8"
       }
@@ -596,7 +596,7 @@
   {
     "inputs": [
       {
-        "internalType": "enum TestLensApiConsumerContract.Move",
+        "internalType": "enum PhatStrategy.Move",
         "name": "_c2",
         "type": "uint8"
       }
@@ -641,7 +641,7 @@
   {
     "inputs": [
       {
-        "internalType": "enum TestLensApiConsumerContract.Move",
+        "internalType": "enum PhatStrategy.Move",
         "name": "_c1",
         "type": "uint8"
       },

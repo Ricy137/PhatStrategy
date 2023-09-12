@@ -98,7 +98,7 @@ function fetchLensApiStats(lensApi: string, handle: string[]): any {
 //            this example, it just a simple text of the lens api url prefix.
 //
 // Your returns value MUST be a hex string, and it will send to your contract directly. Check the `_onMessageReceived` function in
-// TestLensApiConsumerContract.sol for more details. We suggest a tuple of three elements: [successOrNotFlag, requestId, data] as
+// PhatStrategy.sol for more details. We suggest a tuple of three elements: [successOrNotFlag, requestId, data] as
 // the return value.
 //
 export default function main(request: HexString, settings: string): HexString {

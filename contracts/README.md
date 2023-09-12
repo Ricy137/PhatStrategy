@@ -255,7 +255,7 @@ Now that the package dependencies are installed, lets build the default function
     //            this example, it just a simple text of the lens api url prefix.
     //
     // Your returns value MUST be a hex string, and it will send to your contract directly. Check the `_onMessageReceived` function in
-    // TestLensApiConsumerContract.sol for more details. We suggest a tuple of three elements: [successOrNotFlag, requestId, data] as
+    // PhatStrategy.sol for more details. We suggest a tuple of three elements: [successOrNotFlag, requestId, data] as
     // the return value.
     //
     export default function main(request: HexString, settings: string): HexString {
@@ -377,7 +377,7 @@ You will now see that all test cases have passed.
 yarn hardhat test
 # Compiled 14 Solidity files successfully
 #
-#  TestLensApiConsumerContract
+#  PhatStrategy
 #    ✔ Push and receive message (1664ms)
 #
 #  1 passing (2s)
@@ -385,9 +385,9 @@ yarn hardhat test
 # ✨  Done in 3.29s.
 ```
 
-This is how the e2e mocha test will look like. You can customize this file at `./test/TestLensApiConsumerContract.ts`.
+This is how the e2e mocha test will look like. You can customize this file at `./test/PhatStrategy.ts`.
 <details>
-  <summary>View file <code>TestLensApiConsumerContract.ts</code></summary>
+  <summary>View file <code>PhatStrategy.ts</code></summary>
 
     import { expect } from "chai";
     import { type Contract, type Event } from "ethers";
@@ -418,12 +418,12 @@ This is how the e2e mocha test will look like. You can customize this file at `.
       return receipt.events;
     }
     
-    describe("TestLensApiConsumerContract", function () {
+    describe("PhatStrategy", function () {
       it("Push and receive message", async function () {
         // Deploy the contract
         const [deployer] = await ethers.getSigners();
-        const TestLensApiConsumerContract = await ethers.getContractFactory("TestLensApiConsumerContract");
-        const consumer = await TestLensApiConsumerContract.deploy(deployer.address);
+        const PhatStrategy = await ethers.getContractFactory("PhatStrategy");
+        const consumer = await PhatStrategy.deploy(deployer.address);
     
         // Make a request
         const profileId = "0x01";
@@ -482,13 +482,13 @@ yarn localhost-deploy
 Make sure to copy the deployed contract address when you deploy your own contract locally. Note you contract address will be different than `0x0165878A594ca255338adfa4d48449f69242Eb8F`. We will now start watching the hardhat node deployed contract for any new requests.
 
 ```bash
-yarn localhost-watch 0x0165878A594ca255338adfa4d48449f69242Eb8F artifacts/contracts/TestLensApiConsumerContract.sol/TestLensApiConsumerContract.json dist/index.js -a https://api-mumbai.lens.dev/
+yarn localhost-watch 0x0165878A594ca255338adfa4d48449f69242Eb8F artifacts/contracts/PhatStrategy.sol/PhatStrategy.json dist/index.js -a https://api-mumbai.lens.dev/
 ```
 
 ```bash
-yarn localhost-watch 0x0165878A594ca255338adfa4d48449f69242Eb8F artifacts/contracts/TestLensApiConsumerContract.sol/TestLensApiConsumerContract.json dist/index.js -a https://api-mumbai.lens.dev/
-# $ phat-fn watch 0x0165878A594ca255338adfa4d48449f69242Eb8F artifacts/contracts/TestLensApiConsumerContract.sol/TestLensApiConsumerContract.json dist/index.js -a https://api-mumbai.lens.dev/
-# Listening for TestLensApiConsumerContract MessageQueued events...
+yarn localhost-watch 0x0165878A594ca255338adfa4d48449f69242Eb8F artifacts/contracts/PhatStrategy.sol/PhatStrategy.json dist/index.js -a https://api-mumbai.lens.dev/
+# $ phat-fn watch 0x0165878A594ca255338adfa4d48449f69242Eb8F artifacts/contracts/PhatStrategy.sol/PhatStrategy.json dist/index.js -a https://api-mumbai.lens.dev/
+# Listening for PhatStrategy MessageQueued events...
 ```
 
 Let’s now make a new request and see what happens with the listener’s output. In separate tab, you will push a request with the following.
@@ -511,7 +511,7 @@ LOCALHOST_CONSUMER_CONTRACT_ADDRESS=0x0165878A594ca255338adfa4d48449f69242Eb8F y
 If we look back at the listener tab, we will see output has been appended.
 
 ```typescript
-Listening for TestLensApiConsumerContract MessageQueued events...
+Listening for PhatStrategy MessageQueued events...
 Received event [MessageQueued]: {
   tail: 0n,
   data: '0x0000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000000043078303100000000000000000000000000000000000000000000000000000000'
@@ -566,10 +566,10 @@ yarn test-verify 0x090E8fDC571d65459569BC87992C1026121DB955
 # Nothing to compile
 # No need to generate any newer typings.
 # Successfully submitted source code for contract
-# contracts/TestLensApiConsumerContract.sol:TestLensApiConsumerContract at 0x090E8fDC571d65459569BC87992C1026121DB955
+# contracts/PhatStrategy.sol:PhatStrategy at 0x090E8fDC571d65459569BC87992C1026121DB955
 # for verification on the block explorer. Waiting for verification result...
 #
-# Successfully verified contract TestLensApiConsumerContract on Etherscan.
+# Successfully verified contract PhatStrategy on Etherscan.
 # https://mumbai.polygonscan.com/address/0x090E8fDC571d65459569BC87992C1026121DB955#code
 # ✨  Done in 5.91s.
 ```
@@ -733,10 +733,10 @@ yarn main-verify 0xbb0d733BDBe151dae3cEf8D7D63cBF74cCbf04C4
 # Nothing to compile
 # No need to generate any newer typings.
 # Successfully submitted source code for contract
-# contracts/TestLensApiConsumerContract.sol.sol:TestLensApiConsumerContract.sol.sol at 0xbb0d733BDBe151dae3cEf8D7D63cBF74cCbf04C4
+# contracts/PhatStrategy.sol.sol:PhatStrategy.sol.sol at 0xbb0d733BDBe151dae3cEf8D7D63cBF74cCbf04C4
 # for verification on the block explorer. Waiting for verification result...
 #
-# Successfully verified contract TestLensApiConsumerContract.sol on Etherscan.
+# Successfully verified contract PhatStrategy.sol on Etherscan.
 # https://polygonscan.com/address/0xbb0d733BDBe151dae3cEf8D7D63cBF74cCbf04C4#code
 # Done in 8.88s.
 ```
