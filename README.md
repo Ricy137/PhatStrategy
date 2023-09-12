@@ -1,9 +1,10 @@
 # PhatStrategy
 An on-chain strategy game that's leveraging [Karma3 api(lens)](https://openapi.lens.k3l.io/) and phat function. It's a two-players game, so call your friend, bet few Matics, compete your strategies and enjoy the exertion of wisdom.
 
-[Live Demo]([https://phata-strategy.vercel.app/](https://phata-strategy.vercel.app/) *testnet currently*
+[Live Demo](https://phata-strategy.vercel.app/) 
+*testnet currently,I've deployed the phat function to mainnet but couldn't recieve response, even if it works fine on testnet😮‍💨...*
 
-[Video](https://www.youtube.com/watch?v=WrLH3gKIidQ)
+[Demo Video](https://www.youtube.com/watch?v=WrLH3gKIidQ)
 
 |||
 |-|-|
