@@ -1,4 +1,4 @@
-export const Move = ["Null", "Keep", "Reverse"];
+export const Move = ["Null", "Reverse", "Keep"];
 
 export const Processing_Status = ["J2Moving", "J1Solving"];
 
