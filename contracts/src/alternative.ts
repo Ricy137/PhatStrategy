@@ -1,3 +1,4 @@
+//DUE to Karma3 api is refusing service to me. This is an alternative Phat Function for PhatStrategy.
 import "@phala/pink-env";
 import { Coders } from "@phala/ethers";
 
@@ -6,6 +7,7 @@ type HexString = `0x${string}`;
 // eth abi coder
 const uintCoder = new Coders.NumberCoder(32, false, "uint256");
 const stringCoder = new Coders.StringCoder("string");
+const bytesCoder = new Coders.BytesCoder("bytes");
 
 function encodeReply(reply: [number, number, number]): HexString {
   return Coders.encode([uintCoder, uintCoder, uintCoder], reply) as HexString;
@@ -37,28 +39,78 @@ function errorToCode(error: Error): number {
   }
 }
 
+function isHexString(str: string): boolean {
+  const regex = /^0x[0-9a-f]+$/;
+  return regex.test(str.toLowerCase());
+}
+
+function stringToHex(str: string): string {
+  var hex = "";
+  for (var i = 0; i < str.length; i++) {
+    hex += str.charCodeAt(i).toString(16);
+  }
+  return "0x" + hex;
+}
+
 function fetchLensApiStats(lensApi: string, handle: string[]): any {
   if (handle[0] == handle[1]) return 0;
   let headers = {
     "Content-Type": "application/json",
     "User-Agent": "phat-contract",
   };
-  const rankStra = Math.random() > 0.5 ? "engagement" : "creator";
-  const firstUrl = `${lensApi}/profile/score?strategy=${rankStra}&handle=${handle[0]}`;
-  const secondUrl = `${lensApi}/profile/score?strategy=${rankStra}&handle=${handle[1]}`;
+  let query1 = JSON.stringify({
+    query: `query Profile {
+            profile(request: { profileId: \"${handle[0]}\" }) {
+                stats {
+                    totalFollowers
+                    totalFollowing
+                }
+            }
+        }`,
+  });
+  let query2 = JSON.stringify({
+    query: `query Profile {
+            profile(request: { profileId: \"${handle[1]}\" }) {
+                stats {
+                    totalFollowers
+                    totalFollowing
+                }
+            }
+        }`,
+  });
+  let body1 = stringToHex(query1);
+  let body2 = stringToHex(query2);
+  // const firstUrl = `${lensApi}/profile/score?strategy=${rankStra}&handle=${handle[0]}`;
+  // const secondUrl = `${lensApi}/profile/score?strategy=${rankStra}&handle=${handle[1]}`;
   try {
     let [res1, res2] = pink.batchHttpRequest(
+      // [
+      //   {
+      //     url: firstUrl,
+      //     method: "GET",
+      //     headers,
+      //     returnTextBody: true,
+      //   },
+      //   {
+      //     url: secondUrl,
+      //     method: "GET",
+      //     headers,
+      //     returnTextBody: true,
+      //   },
+      // ],
       [
         {
-          url: firstUrl,
-          method: "GET",
+          url: lensApi,
+          method: "POST",
           headers,
+          body: body1,
           returnTextBody: true,
         },
         {
-          url: secondUrl,
-          method: "GET",
+          url: lensApi,
+          method: "POST",
           headers,
+          body: body2,
           returnTextBody: true,
         },
       ],
@@ -85,12 +137,57 @@ function fetchLensApiStats(lensApi: string, handle: string[]): any {
     }
     let res1Body = JSON.parse(res1.body);
     let res2Body = JSON.parse(res2.body);
-    let res = res1Body.score > res2Body.score ? 1 : 2;
+    const rankStra = Math.random();
+    let res = 0;
+    if (rankStra < 0.5) {
+      console.log(
+        "toltal followers",
+        res1Body.data.profile.stats.totalFollowers,
+        res2Body.data.profile.stats.totalFollowers
+      );
+      res =
+        res1Body.data.profile.stats.totalFollowers >
+        res2Body.data.profile.stats.totalFollowers
+          ? 1
+          : res1Body.data.profile.stats.totalFollowers ===
+            res2Body.data.profile.stats.totalFollowers
+          ? 0
+          : 2;
+    } else {
+      console.log(
+        "toltal following",
+        res1Body.data.profile.stats.following,
+        res2Body.data.profile.stats.following
+      );
+      res =
+        res1Body.data.profile.stats.totalFollowing >
+        res2Body.data.profile.stats.totalFollowing
+          ? 1
+          : res1Body.data.profile.stats.totalFollowing ===
+            res2Body.data.profile.stats.totalFollowing
+          ? 0
+          : 2;
+    }
+    // let res = res1Body.score > res2Body.score ? 1 : 2;
     return res;
   } catch (e) {
     console.log(e);
     throw Error.FailedToFetchData;
   }
+}
+
+function parseProfileId(hexx: string): string {
+  var hex = hexx.toString();
+  if (!isHexString(hex)) {
+    throw Error.BadLensProfileId;
+  }
+  hex = hex.slice(2);
+  var str = "";
+  for (var i = 0; i < hex.length; i += 2) {
+    const ch = String.fromCharCode(parseInt(hex.substring(i, i + 2), 16));
+    str += ch;
+  }
+  return str;
 }
 
 //
@@ -113,15 +210,17 @@ export default function main(request: HexString, settings: string): HexString {
   let requestId, firstHand, secondHand;
   try {
     [requestId, firstHand, secondHand] = Coders.decode(
-      [uintCoder, stringCoder, stringCoder],
+      [uintCoder, bytesCoder, bytesCoder],
       request
     );
   } catch (error) {
     console.info("Malformed request received");
     return encodeReply([TYPE_ERROR, 0, errorToCode(error as Error)]);
   }
-  let handles = [firstHand, secondHand];
-  console.log(`Request received for profile ${handles}`);
+  const profileId1 = parseProfileId(firstHand as string);
+  const profileId2 = parseProfileId(secondHand as string);
+  let handles = [profileId1, profileId2];
+  console.log(`Request received for profile ${profileId1} ${profileId2}`);
 
   try {
     const respData = fetchLensApiStats(settings, handles);
