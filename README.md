@@ -11,11 +11,11 @@ An on-chain strategy game that's leveraging [Karma3 api(changed lens api now)](h
 
 
 
-|||
-|-|-|
-|mumbai testnet address(original)|0xa8b024F2622D89456018A3F5A8bc834b9FB8215E|
-|mumbai testnet address(with lens api|0x72EfA99059F29e87340d153aB12CCc0E562985e9|
-|polygon mainnet address(with lens api)|0x682b19588Fa42040ab63D0B3Fd33F6b631EA8e15|
+||consumer address|lens oracle endpoint|
+|-|-|-|
+|mumbai testnet address(original)|0xa8b024F2622D89456018A3F5A8bc834b9FB8215E|0x600951d64bea76d39fba9c9529b5e6e51f61883f|
+|mumbai testnet address(with lens api|0x72EfA99059F29e87340d153aB12CCc0E562985e9|0x522ed09cdc771ac9c987946cd64b316182a9d67d|
+|polygon mainnet address(with lens api)|0x682b19588Fa42040ab63D0B3Fd33F6b631EA8e15|0x01b4f037276e2734aa19417150a4a30a7d81b589|
 
 ## Game Rules and process
 Basically, firsthand assign two lens handles, and the one who's assigned the handle with higher score of [Karma3 profile score](https://docs.karma3labs.com/decentralized-social/lens-protocol) wins and get all the stakes apart of 1% fees. However, both firsthand and secondhand can choose to reverse or not. If only one person choose to reverse, then the one with lower score will win, if no one or both choose to reverse, then higher scored one still wins. And the score from Karma3 algorithm can be from "engagement" or "creator" strategy, they'll be randomly used with equal chances. (more detailed explanation is on *How's it designed* part). 
