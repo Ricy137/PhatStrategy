@@ -7,8 +7,11 @@ An on-chain strategy game that's leveraging [Karma3 api(changed lens api now)](h
 
 [Demo Video(with lens api,only firsthand's assignments' format changed in the frontend)](https://youtu.be/H3bQjRgwXS4) 
 
-[Live Demo(currently working lens api project)](https://phata-strategy.vercel.app/) 
+[Live Demo(currently working lens api project, testnet)](https://phata-strategy.vercel.app/) 
 
+[Live Demo(currently working lens api project, mainnet, **warning: Though the workflow is functional, the project's still demo stage, extra auditting and testing is required to be production ready, interacting on mainnet may make you lose money**)](https://phat-strategy.vercel.app/)
+
+Detailed configuration in the README of frontend/contracts' own folder 
 
 
 ||consumer address|lens oracle endpoint|
